@@ -42,9 +42,6 @@ int main(int argc, const char * argv[]) {
     
     
     
-    
-    // insert code here...
-    printf("Hello, World!\n");
     return 0;
 }
 
@@ -77,4 +74,75 @@ void Inserir(no **Raiz, int numero){
         }
 
 }
+
+
+//Remover Elementos
+void Remover(no **Raiz, int numero){
+    if(*Raiz == NULL){   // esta verificacao serve para caso o numero nao exista na arvore.
+        printf("Numero nao existe na arvore!");
+        getch();
+        return;
+    }
+    if(numero < (*Raiz)->numero)
+        remover(&(*Raiz)->esquerda, numero);
+    else
+        if(numero > (*Raiz)->numero)
+            remover(&(*Raiz)->direita, numero);
+        else{    // se nao eh menor nem maior, logo, eh o numero que estou procurando! :)
+            no *pAux = *Raiz;     // quem programar no Embarcadero vai ter que declarar o pAux no inicio do void! :[
+            if (((*Raiz)->esquerda == NULL) && ((*Raiz)->direita == NULL)){         // se nao houver filhos...
+                free(pAux);
+                (*Raiz) = NULL;
+            }
+            else{     // so tem o filho da direita
+                if ((*Raiz)->esquerda == NULL){
+                    (*Raiz) = (*Raiz)->direita;
+                    pAux->direita = NULL;
+                    free(pAux); pAux = NULL;
+                }
+                else{            //so tem filho da esquerda
+                    if ((*Raiz)->direita == NULL){
+                        (*Raiz) = (*Raiz)->esquerda;
+                        pAux->esquerda = NULL;
+                        free(pAux); pAux = NULL;
+                    }
+                    else{       //Escolhi fazer o maior filho direito da subarvore esquerda.
+                        pAux = MaiorDireita(&(*Raiz)->esquerda); //se vc quiser usar o Menor da esquerda, so o que mudaria seria isso:
+                        pAux->esquerda = (*Raiz)->esquerda;          //        pAux = MenorEsquerda(&(*pRaiz)->direita);
+                        pAux->direita = (*Raiz)->direita;
+                        (*Raiz)->esquerda = (*Raiz)->direita = NULL;
+                        free((*Raiz));  *Raiz = pAux;  pAux = NULL;
+                    }
+                }
+            }
+        }
+
+    
+}
+/*no *MaiorDireita(no **no){
+    if((*no)->direita != NULL)
+        return MaiorDireita(&(*no)->direita);
+    else{
+        No *aux = *no;
+        if((*no)->esquerda != NULL) // se nao houver essa verificacao, esse nó vai perder todos os seus filhos da esquerda!
+            *no = (*no)->esquerda;
+        else
+            *no = NULL;
+        return aux;
+    }
+}
+
+no *MenorEsquerda(no **no){
+    if((*no)->esquerda != NULL)
+        return MenorEsquerda(&(*no)->esquerda);
+    else{
+        No *aux = *no;
+        if((*no)->direita != NULL) // se nao houver essa verificacao, esse nó vai perder todos os seus filhos da direita!
+            *no = (*no)->direita;
+        else
+            *no = NULL;
+        return aux;
+    }
+}*/
+
 
