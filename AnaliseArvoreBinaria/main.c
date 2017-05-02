@@ -10,16 +10,18 @@
 #include <time.h>
 #define TAM 50
 
-void CriarArvore();
-void Inserir();
-void Remover();
-
-
 typedef struct NO{
     int numero;
     struct NO *esquerda;
     struct NO *direita;
 }no;
+
+
+void CriarArvore();
+void Inserir();
+void Remover();
+no *MaiorDireita()
+
 
 
 
@@ -119,30 +121,30 @@ void Remover(no **Raiz, int numero){
 
     
 }
-/*no *MaiorDireita(no **no){
-    if((*no)->direita != NULL)
-        return MaiorDireita(&(*no)->direita);
+no *MaiorDireita(no **No){
+    if((*No)->direita != NULL)
+        return MaiorDireita(&(*No)->direita);
     else{
-        No *aux = *no;
-        if((*no)->esquerda != NULL) // se nao houver essa verificacao, esse nó vai perder todos os seus filhos da esquerda!
-            *no = (*no)->esquerda;
+        no *aux = *No;
+        if((*No)->esquerda != NULL) // se nao houver essa verificacao, esse nó vai perder todos os seus filhos da esquerda!
+            *No = (*No)->esquerda;
         else
-            *no = NULL;
+            *No = NULL;
         return aux;
     }
 }
 
-no *MenorEsquerda(no **no){
-    if((*no)->esquerda != NULL)
-        return MenorEsquerda(&(*no)->esquerda);
+no *MenorEsquerda(no **No){
+    if((*No)->esquerda != NULL)
+        return MenorEsquerda(&(*No)->esquerda);
     else{
-        No *aux = *no;
-        if((*no)->direita != NULL) // se nao houver essa verificacao, esse nó vai perder todos os seus filhos da direita!
-            *no = (*no)->direita;
+        no *aux = *No;
+        if((*No)->direita != NULL) // se nao houver essa verificacao, esse nó vai perder todos os seus filhos da direita!
+            *No = (*No)->direita;
         else
-            *no = NULL;
+            *No = NULL;
         return aux;
     }
-}*/
+}
 
 
